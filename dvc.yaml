@@ -23,7 +23,7 @@ stages:
       - artifacts/prepare_base_model
 
 
-training:
+  training:
     cmd: python src/cnnClassifier/pipeline/stage_03_model_training.py
     deps:
       - src/cnnClassifier/pipeline/stage_03_model_training.py
