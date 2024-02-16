@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/DL%20projects/Aadhar_Pan_classification/mlruns/0/52a3efe104f7404e884c1870ee71eb61/artifacts
+end_time: 1708111270473
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 52a3efe104f7404e884c1870ee71eb61
+run_name: rambunctious-bug-964
+run_uuid: 52a3efe104f7404e884c1870ee71eb61
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1708111259340
+status: 3
+tags: []
+user_id: mmanoj
