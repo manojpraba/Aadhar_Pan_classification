@@ -43,9 +43,9 @@ stages:
   
 
   evaluation:
-    cmd: python src/cnnClassifier/pipeline/stage_04_evaluation.py
+    cmd: python src/cnnClassifier/pipeline/stage_04_model_evaluation.py
     deps:
-      - src/cnnClassifier/pipeline/stage_04_evaluation.py
+      - src/cnnClassifier/pipeline/stage_04_model_evaluation.py
       - config/config.yaml
       - artifacts/data_ingestion/Aadhar_Pan
       - artifacts/training/model.h5

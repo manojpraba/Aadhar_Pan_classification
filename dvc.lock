@@ -1,0 +1,117 @@
+schema: '2.0'
+stages:
+  data_ingestion:
+    cmd: python src/cnnClassifier/pipeline/stage_01_data_ingestion.py
+    deps:
+    - path: config/config.yaml
+      hash: md5
+      md5: 80088400575101467266b46119c3a31e
+      size: 812
+    - path: src/cnnClassifier/pipeline/stage_01_data_ingestion.py
+      hash: md5
+      md5: 1e92317ecf284f1afc52c67295e9868d
+      size: 906
+    outs:
+    - path: artifacts/data_ingestion/Aadhar_Pan
+      hash: md5
+      md5: 0d02e9b9bbce4fa586594d44adcf4d15.dir
+      size: 28791516
+      nfiles: 517
+  prepare_base_model:
+    cmd: python src/cnnClassifier/pipeline/stage2_prepare_base_model.py
+    deps:
+    - path: config/config.yaml
+      hash: md5
+      md5: 80088400575101467266b46119c3a31e
+      size: 812
+    - path: src/cnnClassifier/pipeline/stage2_prepare_base_model.py
+      hash: md5
+      md5: e8e39a301f4b90d1b4f2c86acc66ef32
+      size: 999
+    params:
+      params.yaml:
+        CLASSES: 2
+        IMAGE_SIZE:
+        - 224
+        - 224
+        - 3
+        INCLUDE_TOP: false
+        LEARNING_RATE: 0.01
+        WEIGHTS: imagenet
+    outs:
+    - path: artifacts/prepare_base_model
+      hash: md5
+      md5: d68daa18c6bd61ce97887210fab666c2.dir
+      size: 118054560
+      nfiles: 2
+  training:
+    cmd: python src/cnnClassifier/pipeline/stage_03_model_training.py
+    deps:
+    - path: artifacts/data_ingestion/Aadhar_Pan
+      hash: md5
+      md5: 0d02e9b9bbce4fa586594d44adcf4d15.dir
+      size: 28791516
+      nfiles: 517
+    - path: artifacts/prepare_base_model
+      hash: md5
+      md5: d68daa18c6bd61ce97887210fab666c2.dir
+      size: 118054560
+      nfiles: 2
+    - path: config/config.yaml
+      hash: md5
+      md5: 80088400575101467266b46119c3a31e
+      size: 812
+    - path: src/cnnClassifier/components/prepare_callbacks.py
+      hash: md5
+      md5: df047e424075dcab9aec144951712130
+      size: 1006
+    - path: src/cnnClassifier/pipeline/stage_03_model_training.py
+      hash: md5
+      md5: 3afa752d20abff4e25c4639c61bf13bc
+      size: 1265
+    params:
+      params.yaml:
+        AUGMENTATION: true
+        BATCH_SIZE: 16
+        EPOCHS: 2
+        IMAGE_SIZE:
+        - 224
+        - 224
+        - 3
+    outs:
+    - path: artifacts/training/model.h5
+      hash: md5
+      md5: 78f3be9d9b6a48eb199bef1291eae4b4
+      size: 59337520
+  evaluation:
+    cmd: python src/cnnClassifier/pipeline/stage_04_model_evaluation.py
+    deps:
+    - path: artifacts/data_ingestion/Aadhar_Pan
+      hash: md5
+      md5: 0d02e9b9bbce4fa586594d44adcf4d15.dir
+      size: 28791516
+      nfiles: 517
+    - path: artifacts/training/model.h5
+      hash: md5
+      md5: 78f3be9d9b6a48eb199bef1291eae4b4
+      size: 59337520
+    - path: config/config.yaml
+      hash: md5
+      md5: 80088400575101467266b46119c3a31e
+      size: 812
+    - path: src/cnnClassifier/pipeline/stage_04_model_evaluation.py
+      hash: md5
+      md5: e5acfe1c4e9e0a3f116bebf9898cb1ee
+      size: 938
+    params:
+      params.yaml:
+        BATCH_SIZE: 16
+        IMAGE_SIZE:
+        - 224
+        - 224
+        - 3
+    outs:
+    - path: scores.json
+      hash: md5
+      md5: 05ce08c8109b335a5f1df8640764d7bd
+      size: 74
