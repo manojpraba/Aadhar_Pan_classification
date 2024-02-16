@@ -129,3 +129,4 @@ dmypy.json
 .pyre/
 inputImage.jpg
 model/model_vgg16.h5
+artifacts/*
