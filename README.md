@@ -1,5 +1,5 @@
 # Aadhar_Pan_classification
-The objective is to differentiate between Aadhar cards and PAN cards using a classification model. The model is based on a pre-trained VGG16 architecture, initially trained on the ImageNet dataset. Subsequently, a custom artificial neural network (ANN) layer is added to the VGG16 model for classification. This custom model is trained using a dataset comprising 250 Aadhar cards and 220 PAN cards, over 200 epochs. After training, the model achieves an accuracy of 96% in distinguishing between Aadhar cards and PAN cards.
+The objective is to differentiate between Aadhar cards and PAN cards using a classification model. The model is based on a pre-trained VGG16 architecture, initially trained on the ImageNet dataset. Subsequently, a custom artificial neural network (ANN) layer is added to the VGG16 model for classification. This custom model is trained using a dataset comprising 250 Aadhar cards and 220 PAN cards, over 100 epochs. After training, the model achieves an accuracy of 96% in distinguishing between Aadhar cards and PAN cards.
 
 ## input and output
 ![alt tag](https://github.com/manojpraba/Aadhar_Pan_classification/blob/main/sceenshots/aadhar_predict.png)
