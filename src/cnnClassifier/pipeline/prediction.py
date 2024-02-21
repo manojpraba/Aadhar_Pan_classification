@@ -2,7 +2,7 @@ import numpy as np
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 import os
-
+from cnnClassifier import logger
 
 
 class PredictionPipeline:
@@ -21,10 +21,17 @@ class PredictionPipeline:
         test_image = np.expand_dims(test_image, axis = 0)
         result = np.argmax(model.predict(test_image), axis=1)
         print(result)
-
-        if result[0] == 1:
-            prediction = 'AADHAR CARD'
-            return [{ "image" : prediction}]
-        else:
-            prediction = 'PAN CARD'
-            return [{ "image" : prediction}]
+        try:
+            if result[0] == 1:
+                prediction = 'Aadhar CARD'
+                return [{ "image" : prediction}]
+            else:
+                prediction = 'PAN CARD'
+                return [{ "image" : prediction}]
+        except Exception as e:
+            logger.exception(e)
+            
+            return [{ "image" : e}]
+           
+        
+        
