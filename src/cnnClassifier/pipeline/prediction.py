@@ -3,7 +3,8 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 import os
 from cnnClassifier import logger
-
+from cnnClassifier.OCR.aadhar_deatils import Aadhar_extract as ad
+from cnnClassifier.OCR.pan_details import pan_extract as pd
 
 class PredictionPipeline:
     def __init__(self,filename):
@@ -30,10 +31,14 @@ class PredictionPipeline:
         try:
             if result[0] == 1:
                 prediction = 'Aadhar CARD'
-                return [{ "image" : prediction}]
+                values=ad(imagename)
+                
+                return [values.extract()]
+           
             else:
                 prediction = 'PAN CARD'
-                return [{ "image" : prediction}]
+                values=pd(imagename)
+                return [values.extract()]
         except Exception as e:
             logger.exception(e)
             
