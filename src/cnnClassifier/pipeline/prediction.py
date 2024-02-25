@@ -19,6 +19,12 @@ class PredictionPipeline:
         test_image = image.load_img(imagename, target_size = (224,224))
         test_image = image.img_to_array(test_image)
         test_image = np.expand_dims(test_image, axis = 0)
+        value=model.predict(test_image)
+        print("original",model.predict(test_image))
+        print("This is the prediction value",value[0][0],"and",value[0][1])
+        print("==============================")
+        logger.info(f"This is the prediction value {value[0][0]} and {value[0][1]}")
+                    
         result = np.argmax(model.predict(test_image), axis=1)
         print(result)
         try:
