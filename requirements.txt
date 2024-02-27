@@ -16,4 +16,8 @@ scipy
 Flask
 Flask-Cors
 gdown
+opencv-python
+easyocr
+spacy
+pytesseract
 -e .
