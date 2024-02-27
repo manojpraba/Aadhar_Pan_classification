@@ -18,4 +18,6 @@ Flask-Cors
 gdown
 opencv-python
 easyocr
+spacy
+pytesseract
 -e .
